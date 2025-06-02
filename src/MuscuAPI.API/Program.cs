@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+<<<<<<< Updated upstream
 using Microsoft.OpenApi.Models;
 using MuscuAPI.API.Extensions;
 using MuscuAPI.Application.Interfaces;
+=======
+>>>>>>> Stashed changes
 using MuscuAPI.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
+<<<<<<< Updated upstream
 // Configuration Entity Framework Core
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -33,6 +37,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+=======
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+// Add Swagger - IMPORTANT : Ces lignes sont nécessaires
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+>>>>>>> Stashed changes
 
 var app = builder.Build();
 

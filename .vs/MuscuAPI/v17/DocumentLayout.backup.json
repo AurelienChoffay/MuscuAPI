@@ -1,37 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Aurelien\\Documents\\GitHub\\MuscuAPI\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FA0232-5DAB-4EBE-BB73-4AA671818EA4}|src\\MuscuAPI.API\\MuscuAPI.API.csproj|c:\\users\\aurelien\\documents\\github\\muscuapi\\src\\muscuapi.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C9FA0232-5DAB-4EBE-BB73-4AA671818EA4}|src\\MuscuAPI.API\\MuscuAPI.API.csproj|solutionrelative:src\\muscuapi.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\Aurelien\\Documents\\GitHub\\MuscuAPI\\src\\MuscuAPI.API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "src\\MuscuAPI.API\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\Aurelien\\Documents\\GitHub\\MuscuAPI\\src\\MuscuAPI.API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "src\\MuscuAPI.API\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-02T16:28:17.016Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

@@ -17,7 +17,6 @@ public class ApplicationDbContext : DbContext
     }
 }
 
-
 // Créer une migration initiale pour vérifier la configuration
 // dotnet ef migrations add InitialCreate -p src/MuscuAPI.Infrastructure -s src/MuscuAPI.API
 

@@ -380,3 +380,9 @@ ehthumbs_vista.db
 # Fichiers spécifiques au projet
 appsettings.local.json
 appsettings.*.local.json
+
+# Autres
+*.dll
+*.suo
+*.pdp
+*.cache

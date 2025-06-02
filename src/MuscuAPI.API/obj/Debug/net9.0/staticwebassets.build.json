@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "gD9R2z4qRAxK2KtoMLyQLfpLwaMeQl/PAg2ReV3Y9Dc=",
+  "Source": "MuscuAPI.API",
+  "BasePath": "_content/MuscuAPI.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

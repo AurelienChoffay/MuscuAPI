@@ -1,0 +1,11 @@
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\bin\Debug\net9.0\MuscuAPI.Domain.deps.json
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\bin\Debug\net9.0\MuscuAPI.Domain.dll
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\bin\Debug\net9.0\MuscuAPI.Domain.pdb
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\MuscuAPI.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\MuscuAPI.Domain.AssemblyInfoInputs.cache
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\MuscuAPI.Domain.AssemblyInfo.cs
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\MuscuAPI.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\MuscuAPI.Domain.dll
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\refint\MuscuAPI.Domain.dll
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\MuscuAPI.Domain.pdb
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Domain\obj\Debug\net9.0\ref\MuscuAPI.Domain.dll

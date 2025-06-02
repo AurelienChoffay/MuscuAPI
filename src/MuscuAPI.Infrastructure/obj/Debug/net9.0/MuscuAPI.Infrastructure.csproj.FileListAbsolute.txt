@@ -17,3 +17,4 @@ C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Infrastructure\obj\Debu
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Infrastructure\obj\Debug\net9.0\MuscuAPI.Infrastructure.pdb
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Infrastructure\obj\Debug\net9.0\MuscuAPI.Infrastructure.genruntimeconfig.cache
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Infrastructure\obj\Debug\net9.0\ref\MuscuAPI.Infrastructure.dll
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Infrastructure\obj\Debug\net9.0\MuscuAPI.Infrastructure.sourcelink.json

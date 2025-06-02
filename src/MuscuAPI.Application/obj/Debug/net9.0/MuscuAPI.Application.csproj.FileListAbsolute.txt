@@ -13,3 +13,4 @@ C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Application\obj\Debug\n
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Application\obj\Debug\net9.0\refint\MuscuAPI.Application.dll
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Application\obj\Debug\net9.0\MuscuAPI.Application.pdb
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Application\obj\Debug\net9.0\ref\MuscuAPI.Application.dll
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.Application\obj\Debug\net9.0\MuscuAPI.Application.sourcelink.json

@@ -176,3 +176,5 @@ C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.API\obj\Debug\net9.0\re
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.API\obj\Debug\net9.0\MuscuAPI.API.pdb
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.API\obj\Debug\net9.0\MuscuAPI.API.genruntimeconfig.cache
 C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.API\obj\Debug\net9.0\ref\MuscuAPI.API.dll
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.API\obj\Debug\net9.0\MuscuAPI.API.sourcelink.json
+C:\Users\Aurelien\Documents\GitHub\MuscuAPI\src\MuscuAPI.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

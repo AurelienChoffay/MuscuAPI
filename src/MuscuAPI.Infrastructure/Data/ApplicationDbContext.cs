@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using MuscuAPI.Domain.Entities;
+using System.Reflection;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MuscuAPI.Infrastructure.Data;
@@ -11,9 +13,13 @@ public class ApplicationDbContext : DbContext
     {
     }
 
+    public DbSet<Muscle> Muscles => Set<Muscle>();
+    public DbSet<GroupeMusculaire> GroupesMusculaires => Set<GroupeMusculaire>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }
 

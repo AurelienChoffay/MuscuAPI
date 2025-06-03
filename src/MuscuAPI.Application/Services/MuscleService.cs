@@ -3,6 +3,7 @@ using MuscuAPI.Application.DTOs.Muscle;
 using MuscuAPI.Application.Services.Interfaces;
 using MuscuAPI.Domain.Entities;
 using MuscuAPI.Domain.Interfaces;
+using System.Linq.Expressions;
 
 namespace MuscuAPI.Application.Services;
 
@@ -138,6 +139,121 @@ public class MuscleService : IMuscleService
         _muscleRepository.Remove(muscle);
         await _muscleRepository.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<PagedResult<MuscleDto>> GetMusclesAsync(MuscleFilterParams filterParams)
+    {
+        // Construire l'expression de filtre
+        Expression<Func<Muscle, bool>> filter = m => true;
+
+        // Filtre par actif/inactif
+        if (!filterParams.IncludeInactive)
+        {
+            Expression<Func<Muscle, bool>> activeFilter = m => m.IsActive;
+            filter = CombineExpressions(filter, activeFilter);
+        }
+
+        // Filtre par groupe (ID ou nom)
+        if (filterParams.GroupeMusculaireId.HasValue)
+        {
+            var groupeId = filterParams.GroupeMusculaireId.Value;
+            Expression<Func<Muscle, bool>> groupeFilter = m => m.GroupeMusculaireId == groupeId;
+            filter = CombineExpressions(filter, groupeFilter);
+        }
+        else if (!string.IsNullOrWhiteSpace(filterParams.Groupe))
+        {
+            var groupeNom = filterParams.Groupe.ToLower();
+            Expression<Func<Muscle, bool>> groupeFilter = m => m.GroupeMusculaire.Nom.ToLower() == groupeNom;
+            filter = CombineExpressions(filter, groupeFilter);
+        }
+
+        // Filtre par terme de recherche
+        if (!string.IsNullOrWhiteSpace(filterParams.SearchTerm))
+        {
+            var searchTerm = filterParams.SearchTerm.ToLower();
+            Expression<Func<Muscle, bool>> searchFilter = m =>
+                m.Nom.ToLower().Contains(searchTerm) ||
+                (m.NomLatin != null && m.NomLatin.ToLower().Contains(searchTerm));
+            filter = CombineExpressions(filter, searchFilter);
+        }
+
+        // Définir le tri
+        Func<IQueryable<Muscle>, IOrderedQueryable<Muscle>> orderBy = filterParams.SortBy?.ToLower() switch
+        {
+            "nomdesc" => q => q.OrderByDescending(m => m.Nom),
+            "groupe" => q => q.OrderBy(m => m.GroupeMusculaire.Ordre).ThenBy(m => m.Nom),
+            "recent" => q => q.OrderByDescending(m => m.CreatedAt),
+            _ => q => q.OrderBy(m => m.Nom)
+        };
+
+        // Calculer la pagination
+        var skip = (filterParams.PageNumber - 1) * filterParams.PageSize;
+
+        // Récupérer les données avec le total
+        var (muscles, totalCount) = await _muscleRepository.GetFilteredMusclesAsync(
+            filter: filter,
+            orderBy: orderBy,
+            skip: skip,
+            take: filterParams.PageSize,
+            includeGroupe: true
+        );
+
+        var muscleDtos = muscles.Select(MapToDto).ToList();
+
+        return new PagedResult<MuscleDto>
+        {
+            Items = muscleDtos,
+            PageNumber = filterParams.PageNumber,
+            PageSize = filterParams.PageSize,
+            TotalCount = totalCount
+        };
+    }
+
+    public async Task<IEnumerable<MuscleDto>> SearchMusclesAsync(string searchTerm)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            return new List<MuscleDto>();
+        }
+
+        var muscles = await _muscleRepository.SearchByNomAsync(searchTerm);
+        return muscles.Select(MapToDto).ToList();
+    }
+
+    // Méthode helper pour combiner les expressions
+    private static Expression<Func<T, bool>> CombineExpressions<T>(
+        Expression<Func<T, bool>> expr1,
+        Expression<Func<T, bool>> expr2)
+    {
+        var parameter = Expression.Parameter(typeof(T));
+
+        var leftVisitor = new ReplaceExpressionVisitor(expr1.Parameters[0], parameter);
+        var left = leftVisitor.Visit(expr1.Body);
+
+        var rightVisitor = new ReplaceExpressionVisitor(expr2.Parameters[0], parameter);
+        var right = rightVisitor.Visit(expr2.Body);
+
+        return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(left, right), parameter);
+    }
+
+    // Classe helper pour remplacer les paramètres dans les expressions
+    private class ReplaceExpressionVisitor : ExpressionVisitor
+    {
+        private readonly Expression _oldValue;
+        private readonly Expression _newValue;
+
+        public ReplaceExpressionVisitor(Expression oldValue, Expression newValue)
+        {
+            _oldValue = oldValue;
+            _newValue = newValue;
+        }
+
+        public override Expression Visit(Expression node)
+        {
+            if (node == _oldValue)
+                return _newValue;
+            return base.Visit(node);
+        }
     }
 
     private static MuscleDto MapToDto(Muscle muscle)

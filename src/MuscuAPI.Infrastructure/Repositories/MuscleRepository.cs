@@ -2,6 +2,8 @@
 using MuscuAPI.Domain.Entities;
 using MuscuAPI.Domain.Interfaces;
 using MuscuAPI.Infrastructure.Data;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace MuscuAPI.Infrastructure.Repositories;
 
@@ -79,5 +81,62 @@ public class MuscleRepository : Repository<Muscle>, IMuscleRepository
     {
         entity.UpdatedAt = DateTime.UtcNow;
         base.Update(entity);
+    }
+
+    public async Task<(IEnumerable<Muscle> muscles, int totalCount)> GetFilteredMusclesAsync(
+    Expression<Func<Muscle, bool>>? filter = null,
+    Func<IQueryable<Muscle>, IOrderedQueryable<Muscle>>? orderBy = null,
+    int? skip = null,
+    int? take = null,
+    bool includeGroupe = true)
+    {
+        IQueryable<Muscle> query = _dbSet;
+
+        if (includeGroupe)
+        {
+            query = query.Include(m => m.GroupeMusculaire);
+        }
+
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        // Compter avant la pagination
+        var totalCount = await query.CountAsync();
+
+        if (orderBy != null)
+        {
+            query = orderBy(query);
+        }
+
+        if (skip.HasValue)
+        {
+            query = query.Skip(skip.Value);
+        }
+
+        if (take.HasValue)
+        {
+            query = query.Take(take.Value);
+        }
+
+        var muscles = await query.ToListAsync();
+        return (muscles, totalCount);
+    }
+
+    public async Task<IEnumerable<Muscle>> GetByGroupeNomAsync(string groupeNom, bool activeOnly = true)
+    {
+        var query = _dbSet
+            .Include(m => m.GroupeMusculaire)
+            .Where(m => m.GroupeMusculaire.Nom.ToLower() == groupeNom.ToLower());
+
+        if (activeOnly)
+        {
+            query = query.Where(m => m.IsActive);
+        }
+
+        return await query
+            .OrderBy(m => m.Nom)
+            .ToListAsync();
     }
 }

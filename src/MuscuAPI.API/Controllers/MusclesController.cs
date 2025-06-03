@@ -17,18 +17,52 @@ public class MusclesController : ControllerBase
     }
 
     /// <summary>
-    /// Obtient la liste des muscles avec pagination
+    /// Obtient la liste des muscles avec filtres et pagination
     /// </summary>
-    /// <param name="paginationParams">Paramètres de pagination</param>
-    /// <param name="groupeMusculaireId">ID du groupe musculaire pour filtrer (optionnel)</param>
+    /// <param name="filterParams">Paramètres de filtrage et pagination</param>
+    /// <remarks>
+    /// Exemples d'utilisation :
+    /// - /api/muscles?pageNumber=1&amp;pageSize=10
+    /// - /api/muscles?groupe=pectoraux
+    /// - /api/muscles?groupeMusculaireId=1
+    /// - /api/muscles?searchTerm=biceps
+    /// - /api/muscles?sortBy=recent&amp;includeInactive=true
+    /// </remarks>
     [HttpGet]
     [ProducesResponseType(typeof(PagedResult<MuscleDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<PagedResult<MuscleDto>>> GetMuscles(
-        [FromQuery] PaginationParams paginationParams,
-        [FromQuery] int? groupeMusculaireId = null)
+        [FromQuery] MuscleFilterParams filterParams)
     {
-        var result = await _muscleService.GetMusclesAsync(paginationParams, groupeMusculaireId);
+        var result = await _muscleService.GetMusclesAsync(filterParams);
+
+        // Ajouter des headers pour la pagination
+        Response.Headers.Add("X-Pagination-TotalCount", result.TotalCount.ToString());
+        Response.Headers.Add("X-Pagination-PageNumber", result.PageNumber.ToString());
+        Response.Headers.Add("X-Pagination-PageSize", result.PageSize.ToString());
+        Response.Headers.Add("X-Pagination-TotalPages", result.TotalPages.ToString());
+
         return Ok(result);
+    }
+
+    /// <summary>
+    /// Recherche des muscles par nom ou nom latin
+    /// </summary>
+    /// <param name="q">Terme de recherche</param>
+    /// <remarks>
+    /// Recherche dans le nom et le nom latin des muscles.
+    /// Exemple : /api/muscles/search?q=biceps
+    /// </remarks>
+    [HttpGet("search")]
+    [ProducesResponseType(typeof(IEnumerable<MuscleDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<MuscleDto>>> SearchMuscles([FromQuery] string q)
+    {
+        if (string.IsNullOrWhiteSpace(q))
+        {
+            return BadRequest(new { message = "Le terme de recherche ne peut pas être vide." });
+        }
+
+        var muscles = await _muscleService.SearchMusclesAsync(q);
+        return Ok(muscles);
     }
 
     /// <summary>

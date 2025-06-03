@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using MuscuAPI.Domain.Interfaces;
 using MuscuAPI.Infrastructure.Data;
+using MuscuAPI.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Register repositories (sera ajouté plus tard)
-// builder.Services.AddScoped<IMuscleRepository, MuscleRepository>();
+// Register repositories
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IMuscleRepository, MuscleRepository>();
+builder.Services.AddScoped<IGroupeMusculaireRepository, GroupeMusculaireRepository>();
 
 var app = builder.Build();
 

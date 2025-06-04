@@ -16,4 +16,6 @@ public class Muscle
     public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+    public virtual ICollection<Exercice> ExercicesPrincipal { get; set; } = new List<Exercice>();
+    public virtual ICollection<ExerciceMuscleSecondaire> ExercicesSecondaire { get; set; } = new List<ExerciceMuscleSecondaire>();
 }

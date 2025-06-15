@@ -5,9 +5,10 @@ public class GroupeMusculaire
     public int Id { get; set; }
     public string Nom { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public int Ordre { get; set; } // Pour trier l'affichage
+    public int Ordre { get; set; }
     public bool IsActive { get; set; } = true;
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    // Navigation
     public ICollection<Muscle> Muscles { get; set; } = new List<Muscle>();
 }

@@ -96,6 +96,7 @@ public class ApplicationDbContext : DbContext
         });
 
         // Configuration ExerciceMuscleSecondaire (Many-to-Many)
+        // Configuration ExerciceMuscleSecondaire (Many-to-Many)
         modelBuilder.Entity<ExerciceMuscleSecondaire>(entity =>
         {
             entity.ToTable("ExercicesMusclesSecondaires");
@@ -107,9 +108,11 @@ public class ApplicationDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(e => e.Muscle)
-                .WithMany()
+                .WithMany(m => m.ExercicesSecondaire)
                 .HasForeignKey(e => e.MuscleId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            entity.Property(e => e.OrdreImportance).IsRequired(false);
         });
 
         // Configuration ExerciceImage
@@ -152,4 +155,4 @@ public class ApplicationDbContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
-}s
+}
